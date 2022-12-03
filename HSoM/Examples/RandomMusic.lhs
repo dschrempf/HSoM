@@ -9,7 +9,7 @@
 > sGen = mkStdGen 42
 
 > randInts :: StdGen -> [Int]
-> randInts g =  let (x,g') = next g
+> randInts g =  let (x,g') = uniform g
 >               in x : randInts g'
 
 > randFloats :: [Float]

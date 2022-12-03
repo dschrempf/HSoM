@@ -1,56 +1,65 @@
-name:           HSoM
-version:        1.0.0
-Cabal-Version:  >= 1.8
-license:        BSD3
-license-file:	License
-copyright:      Copyright (c) 2008-2015 Paul Hudak and Donya Quick
-category:       Sound
-stability:      experimental
-build-type:     Custom
-author:         Paul Hudak <paul.hudak@yale.edu>,
-				Donya Quick <donya.quick@yale.edu>,
-                Dan Winograd-Cort <daniel.winograd-cort@yale.edu>
-maintainer:     Donya Quick <donyaquick@gmail.com>
-bug-reports:    https://github.com/Euterpea/Euterpea/issues
-homepage:       http://haskell.cs.yale.edu/
-synopsis:       Library for computer music education
-description:
-        TBD
-extra-source-files:
-        ReadMe.txt
+cabal-version:      3.0
+name:               HSoM
+version:            1.0.0
+license:            BSD-3-Clause
+license-file:       License
+copyright:          Copyright (c) 2008-2015 Paul Hudak and Donya Quick
+category:           Sound
+stability:          experimental
+author:
+  Paul Hudak <paul.hudak@yale.edu>,
+  Donya Quick <donya.quick@yale.edu>,
+  Dan Winograd-Cort <daniel.winograd-cort@yale.edu>
 
-Library
-  hs-source-dirs: .
-  ghc-options: -O2 -funbox-strict-fields -fexcess-precision
-  extensions: CPP
-  exposed-modules: 
-        System.Random.Distributions,
-        HSoM,
-        HSoM.Performance,
-        HSoM.MUI.MidiWidgets,
-        HSoM.MUI,
-        HSoM.Examples.FFT,
-        HSoM.Examples.MoreMusic,
-        HSoM.Examples.RandomMusic,
-        HSoM.Examples.SoundCheck,
-        HSoM.Examples.SelfSimilar,
-        HSoM.Examples.SSF,
-        HSoM.Examples.Interlude,
-        HSoM.Examples.EuterpeaExamples,
-        HSoM.Examples.MUIExamples1,
-        HSoM.Examples.MUIExamples2,
-        HSoM.Examples.IntervalTrainer,
-        HSoM.Examples.NewResolutions,
-        HSoM.Examples.MusicToSignal,
-        HSoM.Examples.SpectrumAnalysis,
-        HSoM.Examples.Additive,
-        HSoM.Examples.AMandFM,
-        HSoM.Examples.PhysicalModeling
+maintainer:         Donya Quick <donyaquick@gmail.com>
+bug-reports:        https://github.com/Euterpea/Euterpea/issues
+homepage:           http://haskell.cs.yale.edu/
+synopsis:           Library for computer music education
+description:        Library for computer music education.
+extra-source-files: ReadMe.txt
+
+library
+  default-language:   Haskell2010
+  hs-source-dirs:     .
+  ghc-options:        -O2 -funbox-strict-fields -fexcess-precision
+  default-extensions: CPP
+  exposed-modules:
+    HSoM
+    HSoM.Examples.Additive
+    HSoM.Examples.AMandFM
+    HSoM.Examples.EuterpeaExamples
+    HSoM.Examples.FFT
+    HSoM.Examples.Interlude
+    HSoM.Examples.IntervalTrainer
+    HSoM.Examples.MoreMusic
+    HSoM.Examples.MUIExamples1
+    HSoM.Examples.MUIExamples2
+    HSoM.Examples.MusicToSignal
+    HSoM.Examples.NewResolutions
+    HSoM.Examples.PhysicalModeling
+    HSoM.Examples.RandomMusic
+    HSoM.Examples.SelfSimilar
+    HSoM.Examples.SoundCheck
+    HSoM.Examples.SpectrumAnalysis
+    HSoM.Examples.SSF
+    HSoM.MUI
+    HSoM.MUI.MidiWidgets
+    HSoM.Performance
+    System.Random.Distributions
+
   other-modules:
+  autogen-modules:
   build-depends:
-        base >= 3 && < 5, arrows >= 0.4, array, deepseq, random, 
-        HCodecs >= 0.2, Euterpea >= 2.0.3, 
-        containers, markov-chain, pure-fft, 
-        UISF >= 0.4
-  if (impl(ghc >= 6.10))
-    build-depends: base >= 4 && < 5, ghc-prim
+  build-depends:
+    , array
+    , arrows
+    , base          >=4.7 && <5
+    , containers
+    , deepseq
+    , Euterpea
+    , ghc-prim
+    , HCodecs
+    , markov-chain
+    , pure-fft
+    , random
+    , UISF
