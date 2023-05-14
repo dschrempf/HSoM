@@ -3,7 +3,7 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   inputs.euterpea.url = "github:dschrempf/Euterpea2/nix-flake";
   inputs.euterpea.inputs.nixpkgs.follows = "nixpkgs";
@@ -45,9 +45,6 @@
           devShells.default = hpkgs.shellFor {
             packages = _: (builtins.attrValues theseHpkgsDev);
             nativeBuildInputs = with pkgs; [
-              # See https://github.com/NixOS/nixpkgs/issues/59209.
-              bashInteractive
-
               # Haskell toolchain.
               hpkgs.cabal-fmt
               hpkgs.cabal-install
