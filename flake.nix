@@ -9,30 +9,36 @@
   inputs.euterpea.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs =
-    { self
-    , euterpea
-    , flake-utils
-    , nixpkgs
+    {
+      self,
+      euterpea,
+      flake-utils,
+      nixpkgs,
     }:
     let
       theseHpkgNames = [
         "hsom"
       ];
-      thisGhcVersion = "ghc96";
+      thisGhcVersion = "ghc98";
       hOverlay = selfn: supern: {
         haskell = supern.haskell // {
-          packageOverrides = selfh: superh:
-            supern.haskell.packageOverrides selfh superh //
-              {
-                hsom = selfh.callCabal2nix "hsom" ./. { };
-              };
+          packageOverrides =
+            selfh: superh:
+            supern.haskell.packageOverrides selfh superh
+            // {
+              hsom = selfh.callCabal2nix "hsom" ./. { };
+            };
         };
       };
-      perSystem = system:
+      perSystem =
+        system:
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ hOverlay euterpea.overlays.default ];
+            overlays = [
+              hOverlay
+              euterpea.overlays.default
+            ];
           };
           hpkgs = pkgs.haskell.packages.${thisGhcVersion};
           hlib = pkgs.haskell.lib;
@@ -40,7 +46,9 @@
           theseHpkgsDev = builtins.mapAttrs (_: x: hlib.doBenchmark x) theseHpkgs;
         in
         {
-          packages = theseHpkgs // { default = theseHpkgs.hsom; };
+          packages = theseHpkgs // {
+            default = theseHpkgs.hsom;
+          };
 
           devShells.default = hpkgs.shellFor {
             packages = _: (builtins.attrValues theseHpkgsDev);
